@@ -1,0 +1,15 @@
+{
+  "n_trips": 10,
+  "n_observations": 19160,
+  "n_candidate_rows": 130923,
+  "obs_with_true_candidate": 19131,
+  "candidate_recall": 0.9984864300626305,
+  "mean_candidates_per_obs": 6.833141962421712,
+  "median_candidates_per_obs": 8.0,
+  "max_candidates_per_obs": 8,
+  "positive_rate_rows": 0.1461240576522078,
+  "truth_within_1_nearest_of_all_obs": 0.5442066805845511,
+  "truth_within_2_nearest_of_all_obs": 0.9184237995824635,
+  "truth_within_3_nearest_of_all_obs": 0.949634655532359,
+  "truth_within_5_nearest_of_all_obs": 0.9859081419624217
+}
