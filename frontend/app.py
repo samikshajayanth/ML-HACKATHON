@@ -86,6 +86,13 @@ with st.expander("ℹ️ About PathSnap & Problem Context", expanded=False):
 # -----------------------------------------------------------------------------
 st.sidebar.header("⚙️ Configuration")
 
+default_api_url = os.getenv("PATHSNAP_API_URL", "http://10.30.202.102:8000")
+API_URL = st.sidebar.text_input(
+    "Backend API URL",
+    value=default_api_url,
+    help="Enter Laptop 1's IP and port, e.g. http://10.30.202.102:8000",
+)
+
 # Check backend health
 backend_online = False
 try:
@@ -97,7 +104,12 @@ try:
         st.sidebar.warning("🟡 Backend Degraded")
 except Exception:
     st.sidebar.error("🔴 Backend Disconnected")
-    st.sidebar.info(f"Target URL: `{API_URL}`\n\nPlease ensure FastAPI is running on port 8000.")
+    st.sidebar.info(
+        f"Cannot reach `{API_URL}`.\n\n"
+        f"1. Make sure Laptop 1 is running: `./start_backend.sh`\n"
+        f"2. Ensure both laptops are on the same Wi-Fi.\n"
+        f"3. Change the IP above to match Laptop 1."
+    )
 
 st.sidebar.divider()
 st.sidebar.subheader("🎯 Evaluation Trip Selection")
