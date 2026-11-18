@@ -1,27 +1,27 @@
 {
   "final_model": "hist_gradient_boosting",
-  "variant": "untuned",
-  "run_id": "0eb93cbd",
+  "variant": "tuned",
+  "run_id": "8b87c0c1",
   "rule": "CV obs_top1_all within 0.005 of best, then highest CV macro_f1, then lowest inference time per candidate. Student-test used only as confirmation.",
-  "cv_obs_top1_all": 0.761147271,
-  "cv_macro_f1": 0.858713926,
-  "cv_log_loss": 0.202260637,
-  "student_obs_top1_all": 0.85756785,
-  "student_macro_f1": 0.885947996,
-  "infer_us_per_candidate": 3.243415595,
+  "cv_obs_top1_all": 0.7621375905036893,
+  "cv_macro_f1": 0.8595953079454197,
+  "cv_log_loss": 0.18161731276819335,
+  "student_obs_top1_all": 0.8589770354906054,
+  "student_macro_f1": 0.8873673374962181,
+  "infer_us_per_candidate": 4.811215691568449,
   "params": {
     "class_weight": "balanced",
-    "l2_regularization": 0.0,
-    "learning_rate": 0.1,
-    "max_depth": null,
-    "max_iter": 300,
-    "max_leaf_nodes": 31,
-    "min_samples_leaf": 20
+    "l2_regularization": 0.0015063071711665687,
+    "learning_rate": 0.06834246976105905,
+    "max_depth": 12,
+    "max_iter": 550,
+    "max_leaf_nodes": 44,
+    "min_samples_leaf": 10
   },
   "seed": 42,
   "models_within_tolerance": [
+    "hist_gradient_boosting/tuned",
     "hist_gradient_boosting/untuned",
-    "random_forest/untuned",
     "decision_tree/untuned"
   ],
   "artifact": "artifacts/models/final_model.joblib"

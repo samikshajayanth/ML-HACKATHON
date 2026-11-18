@@ -1,0 +1,50 @@
+{
+  "learning_rate": {
+    "type": "float",
+    "low": 0.01,
+    "high": 0.3,
+    "log": true,
+    "justification": "Step size, log scale."
+  },
+  "max_iter": {
+    "type": "int",
+    "low": 100,
+    "high": 600,
+    "step": 50,
+    "justification": "Boosting rounds (early stopping disabled to keep trip grouping intact)."
+  },
+  "max_leaf_nodes": {
+    "type": "int",
+    "low": 8,
+    "high": 63,
+    "justification": "Tree complexity."
+  },
+  "max_depth": {
+    "type": "int",
+    "low": 3,
+    "high": 14,
+    "justification": "Depth cap."
+  },
+  "min_samples_leaf": {
+    "type": "int",
+    "low": 10,
+    "high": 200,
+    "log": true,
+    "justification": "Regularises leaves."
+  },
+  "l2_regularization": {
+    "type": "float",
+    "low": 1e-06,
+    "high": 10.0,
+    "log": true,
+    "justification": "L2 on leaf values."
+  },
+  "class_weight": {
+    "type": "cat",
+    "choices": [
+      null,
+      "balanced"
+    ],
+    "justification": "Imbalance handling."
+  }
+}

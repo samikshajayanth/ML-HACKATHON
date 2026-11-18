@@ -1,28 +1,24 @@
 ﻿.venv/
-__pycache__/
-*.pyc
-.env
-.DS_Store
-.vscode/
-data/
-.venv/
-__pycache__/
-*.pyc
-# environment / cache
-.venv/
 venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+.env
+.DS_Store
+.vscode/
 
 # raw and generated data (too big for GitHub)
 data/
+outputs/training/all_training_candidates.csv
+outputs/training/all_training_features.csv
+outputs/training/candidates/
+outputs/training/features/
 
 # large model files (KNN stores the whole training set, big forests are huge)
 artifacts/models/knn__*.joblib
 artifacts/models/random_forest__*.joblib
 
-# 1.36M-row out-of-fold files (send the final model's one to Member 3 directly)
+# 1.36M-row out-of-fold files
 experiments/oof_predictions/
 
 # Optuna sqlite databases (trials.csv already has every trial)

@@ -1,0 +1,2 @@
+model,cv_macro_f1_untuned,cv_macro_f1_tuned,cv_macro_f1_delta,cv_obs_top1_untuned,cv_obs_top1_tuned,cv_obs_top1_delta,student_obs_top1_untuned,student_obs_top1_tuned,student_obs_top1_delta,cv_log_loss_untuned,cv_log_loss_tuned,fit_time_untuned_s,fit_time_tuned_s,optuna_trials,optuna_time_s
+hist_gradient_boosting,0.858713926,0.8595953079454197,0.0008813819454197569,0.761147271,0.7621375905036893,0.0009903195036893297,0.85756785,0.8589770354906054,0.0014091854906054246,0.202260637,0.18161731276819335,16.6590791,26.198844707978424,15.0,381.8247431250056

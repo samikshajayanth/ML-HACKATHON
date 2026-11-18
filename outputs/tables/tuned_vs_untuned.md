@@ -1,0 +1,3 @@
+| model | cv_macro_f1_untuned | cv_macro_f1_tuned | cv_macro_f1_delta | cv_obs_top1_untuned | cv_obs_top1_tuned | cv_obs_top1_delta | student_obs_top1_untuned | student_obs_top1_tuned | student_obs_top1_delta | cv_log_loss_untuned | cv_log_loss_tuned | fit_time_untuned_s | fit_time_tuned_s | optuna_trials | optuna_time_s |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| hist_gradient_boosting | 0.8587 | 0.8596 | 0.0009 | 0.7611 | 0.7621 | 0.0010 | 0.8576 | 0.8590 | 0.0014 | 0.2023 | 0.1816 | 16.6591 | 26.1988 | 15.0000 | 381.8247 |
