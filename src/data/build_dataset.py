@@ -1,3 +1,4 @@
+
 import argparse
 from pathlib import Path
 
@@ -12,28 +13,26 @@ def main():
     parser = argparse.ArgumentParser(
         description="Build candidate and feature datasets for training trips."
     )
+
     parser.add_argument(
         "--dataset-root",
         required=True,
-        help="Path to the dataset folder containing train/ and student_test/."
+        help="Dataset folder containing train/ and student_test/."
     )
-    parser.add_argument(
-        "--radius",
-        type=float,
-        default=100
-    )
-    parser.add_argument(
-        "--max-candidates",
-        type=int,
-        default=8
-    )
+
+    parser.add_argument("--radius", type=float, default=100)
+    parser.add_argument("--max-candidates", type=int, default=8)
+
     args = parser.parse_args()
 
     dataset_root = Path(args.dataset_root).expanduser()
+
     train_dir = dataset_root / "train"
 
     if not train_dir.is_dir():
-        raise FileNotFoundError(f"Training directory not found: {train_dir}")
+        raise FileNotFoundError(
+            f"Training directory not found: {train_dir}"
+        )
 
     output_root = Path("outputs/training")
     candidate_dir = output_root / "candidates"
@@ -62,7 +61,11 @@ def main():
         trip_id = folder.name
 
         try:
-            trip = load_trip(dataset_root, "train", trip_id)
+            trip = load_trip(
+                dataset_root,
+                "train",
+                trip_id
+            )
 
             candidates = generator.generate(trip)
             features = extract_features(trip, candidates)
@@ -71,6 +74,7 @@ def main():
                 candidate_dir / f"trip_{trip_id}_candidates.csv",
                 index=False
             )
+
             features.to_csv(
                 feature_dir / f"trip_{trip_id}_features.csv",
                 index=False
@@ -90,8 +94,12 @@ def main():
                 "feature_records": len(features),
                 "observations_with_candidates": covered,
                 "observations_without_candidates": observations - covered,
-                "fallback_candidates": int(candidates["is_fallback"].sum()),
-                "missing_feature_values": int(features.isna().sum().sum()),
+                "fallback_candidates": int(
+                    candidates["is_fallback"].sum()
+                ),
+                "missing_feature_values": int(
+                    features.isna().sum().sum()
+                ),
                 "error": ""
             })
 
@@ -115,21 +123,31 @@ def main():
                 "error": str(error)
             })
 
-            print(f"[{index}/{len(trip_folders)}] {trip_id}: FAILED - {error}")
+            print(
+                f"[{index}/{len(trip_folders)}] "
+                f"{trip_id}: FAILED - {error}"
+            )
 
     if all_candidates:
-        pd.concat(all_candidates, ignore_index=True).to_csv(
+        pd.concat(
+            all_candidates,
+            ignore_index=True
+        ).to_csv(
             output_root / "all_training_candidates.csv",
             index=False
         )
 
     if all_features:
-        pd.concat(all_features, ignore_index=True).to_csv(
+        pd.concat(
+            all_features,
+            ignore_index=True
+        ).to_csv(
             output_root / "all_training_features.csv",
             index=False
         )
 
     report_df = pd.DataFrame(report)
+
     report_df.to_csv(
         output_root / "processing_report.csv",
         index=False
@@ -137,12 +155,26 @@ def main():
 
     print("\n========== BATCH PROCESSING SUMMARY ==========")
     print("Trips found:", len(trip_folders))
-    print("Successful:", (report_df["status"] == "success").sum())
-    print("Failed:", (report_df["status"] == "failed").sum())
-    print("Total candidate records:", report_df["candidate_records"].sum())
-    print("Total feature records:", report_df["feature_records"].sum())
-    print("Total uncovered observations:",
-          report_df["observations_without_candidates"].sum())
+    print(
+        "Successful:",
+        (report_df["status"] == "success").sum()
+    )
+    print(
+        "Failed:",
+        (report_df["status"] == "failed").sum()
+    )
+    print(
+        "Total candidate records:",
+        report_df["candidate_records"].sum()
+    )
+    print(
+        "Total feature records:",
+        report_df["feature_records"].sum()
+    )
+    print(
+        "Total uncovered observations:",
+        report_df["observations_without_candidates"].sum()
+    )
 
     print("\nOutputs saved in:", output_root.resolve())
 

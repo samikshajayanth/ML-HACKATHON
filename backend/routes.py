@@ -1,21 +1,54 @@
+
 from fastapi import APIRouter, HTTPException
-from backend.pipeline import process_trip
+
+from backend.pipeline import (
+    process_trip,
+    get_available_trips
+)
 
 router = APIRouter()
 
 
 @router.get("/trips")
 def get_trips():
-    # Replace with actual trip IDs from the permitted input data.
-    return {"trips": []}
+    try:
+        trips = get_available_trips("student_test")
+
+        return {
+            "split": "student_test",
+            "count": len(trips),
+            "trips": trips
+        }
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=500,
+            detail=str(error)
+        )
 
 
 @router.post("/predict/{trip_id}")
 def predict_trip(trip_id: str):
     try:
-        result = process_trip(trip_id)
-        return result
+        return process_trip(
+            trip_id,
+            split="student_test"
+        )
+
     except ValueError as error:
-        raise HTTPException(status_code=404, detail=str(error))
-    except NotImplementedError as error:
-        raise HTTPException(status_code=501, detail=str(error))
+        raise HTTPException(
+            status_code=404,
+            detail=str(error)
+        )
+
+    except FileNotFoundError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error)
+        )
+
+    except Exception as error:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Pipeline processing failed: {error}"
+        )
